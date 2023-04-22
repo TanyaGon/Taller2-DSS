@@ -1,0 +1,24 @@
+create database Taller2DSS;
+use Taller2DSS;
+
+create table lista(
+	Num_art int not null,
+    Nom_art varchar(50) not null,
+    Precio_unit float not null,
+	Precio_totart float not null	
+)
+
+/*Ejecutar despues de creada la base*/
+use Taller2DSS
+DELIMITER $$
+drop procedure if exists ingreso $$
+create PROCEDURE ingreso(IN cantidad int, IN nombre varchar(50), IN precio float)
+BEGIN
+Declare total float;
+set total = cantidad * precio;
+insert into lista(Num_articulo, Nom_articulo, Precio_unit, Precio_totart) VALUES(cantidad, nombre, precio, total);
+END
+$$
+
+/*Como usar el procedimiento:
+Call ingreso(Cantidad, nombre_articulo, Precio_unitario)*/
